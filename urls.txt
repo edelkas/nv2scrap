@@ -1,0 +1,23 @@
+# Episode
+
+http://www.harveycartel.org/metanet/n/data13/n_highscores_e.php?e_num=0
+
+# Levels
+
+http://www.harveycartel.org/metanet/n/data13/n_highscores_l.php?e_num=0
+
+# Both
+
+http://www.harveycartel.org/metanet/n/data13/get_topscores_query_jg.php?episode_number=0
+# Note: Scores are in frames (at 40fps ofc) here.
+
+# Player
+
+http://www.harveycartel.org/metanet/n/data13/n_highscores_u.php?name=EddyMataGallos
+
+# Demo
+
+http://www.harveycartel.org/metanet/n/data13/get_lv_demo.php?pk=232996
+http://www.harveycartel.org/metanet/n/data13/get_ep_demo.php?pk=39220
+
+# Note: POST (not GET) requests are needed here.

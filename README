@@ -1,0 +1,61 @@
+Scrapes scores from the N v2.0 server into a MySQL database. Each score contains
+the replay id, the actual score in frames (at 60 fps), the player id pointing
+to a table of players, the rank, the episode number, the level number, and the
+demo.
+
+USAGE:
+  * 1) Configure the script by modifying the values of the constants defined at the
+       start of the code. The comments explain their meaning.
+  * 2) Manually create a MySQL database named 'n'. Alternatively, you can modify
+       the CONFIG constant which contains the database parameters.
+  * 3) Run the script. There are various commands available, which can be passed
+       as command line arguments or inserted after execution. Type "help", or
+       any incorrect command really, to see the list of commands.
+
+To have a fully correct database I recommend the following steps:
+  1) Execute 'scrape' to scrape the complete database.
+  2) Execute 'diagnose' to find errors in the database.
+    2.1) Execute 'sanitize' if there are hacked scores.
+    2.2) Execute 'patch' if there are corrupt or missing scores.
+    2.3) Execute 'uniq' if there are duplicate scores.
+  3) Execute 'seed' to fill in the rank field.
+
+NOTES:
+  * The first execution will take longer to start up since the database needs
+    to be set up.
+  * Some scores do not exist, so the total amount of scraped scores will be
+    lower than the total number of different ids.
+  * A few scores do not have demos, so the final number of entries in the
+    'scores' and 'demos' tables may not coincide or some demos maybe be null.
+
+NOTE ON COMPRESSION:
+  For the purpose of compression, the demo code is transformed in a way that
+  exploits their structure to obtain an almost tenfold compression. To recover
+  the original demos read the following details.
+
+  Structure of a demo: The frame count, followed by a colon, followed by a
+  series of numbers separated by vertical bars. Each number encodes 7 frames,
+  and on each frame any combination of the 4 possible inputs can take place
+  (left, right, jump, or hold), with the exception that jump and hold cannot
+  occur simultaneously. Therefore, there are 12 possible combinations for each
+  frame and thus 12^7 = 16M different frame codes.
+
+  To compress the demo we transform this code into a string with each character
+  representing a frame input, with only 12 possible different values. Because
+  of the nature of a demo this is not random and is in fact highly compressible,
+  so we deflate it using Zlib, and then to obtain an ASCII representation we
+  encode it in Base64.
+
+  To see the details of how to encode and decode each demo chunk into the string
+  of inputs for each frame, see the functions "demo_encode" and "demo_decode"
+  on the source code.
+      
+STATS:
+  After using the program to scrape the whole database, and cleaning it, I
+  present some figures.
+  
+  * 365130 scores.
+  * 22222 players (that's right!).
+  * 2189 duplicated/triplicated scores.
+  * 22 scores without a valid demo.
+  * 9 duplicated players.
