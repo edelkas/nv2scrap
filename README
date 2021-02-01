@@ -6,8 +6,8 @@ demo.
 USAGE:
   * 1) Configure the script by modifying the values of the constants defined at the
        start of the code. The comments explain their meaning.
-  * 2) Manually create a MySQL database named 'n'. Alternatively, you can modify
-       the CONFIG constant which contains the database parameters.
+  * 2) Manually create a MySQL database named 'nv2'. Alternatively, you can
+       modify the CONFIG constant which contains the database parameters.
   * 3) Run the script. There are various commands available, which can be passed
        as command line arguments or inserted after execution. Type "help", or
        any incorrect command really, to see the list of commands.
@@ -54,8 +54,8 @@ STATS:
   After using the program to scrape the whole database, and cleaning it, I
   present some figures.
   
-  * 365130 scores.
-  * 22222 players (that's right!).
-  * 2189 duplicated/triplicated scores.
-  * 22 scores without a valid demo.
-  * 9 duplicated players.
+  * ? scores.
+  * ? players.
+  * ? duplicated/triplicated scores.
+  * ? scores without a valid demo.
+  * ? duplicated players.
