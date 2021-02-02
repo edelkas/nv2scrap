@@ -1,1 +1,20 @@
 * Redo README
+
+BOARDS:
+url:
+  * http://nserver.thewayoftheninja.org/highscores/0/00/<id>.txt (id padded to 3 digits for Metanet, userlevels?)
+  * e.g. http://nserver.thewayoftheninja.org/highscores/0/00/001.txt (00-0)
+format:
+  * 0x00 + 10 player blocks + \n
+  * each player block: id (2B), score (4B), name (null-terminated)
+
+DEMO:
+url:
+  * http://bucket.thewayoftheninja.org/<lvl_id>-<player_id>.txt (ids NOT padded)
+  * e.g. http://bucket.thewayoftheninja.org/1-14811.txt (cooper's 00-0 run)
+format:
+  * 1B per frame, 0x00-0x07 mean N,J,L,LJ,R,RJ,LR,LRJ, resp.
+  * zlibbed
+  * base64-encoded
+notes:
+  * last frame is a 0x00, ignore it
